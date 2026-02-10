@@ -6,6 +6,11 @@ from django.contrib.auth.models import AbstractUser
 
 # Custom User Model
 class CustomUser(AbstractUser):
+    """
+    Adds a role field to distinguish between readers, journalists,
+    and editors within the system.
+    """
+
     ROLE_CHOICES = [
         ("reader", "Reader"),
         ("journalist", "Journalist"),
@@ -43,6 +48,11 @@ class Publisher(models.Model):
 
 # Publisher affiliation requests
 class PublisherRequest(models.Model):
+    """
+    Represents a request made by a journalist to be affiliated
+    with a publisher.
+    """
+
     journalist = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
