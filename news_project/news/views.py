@@ -545,6 +545,10 @@ class NewsletterDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # Subscribe journalist (HTML)
 @login_required
 def subscribe_journalist_html(request, pk):
+    """Subscribe the logged-in user
+    to a journalist and redirect to
+    the subscription management page."""
+
     journalist = get_object_or_404(CustomUser, pk=pk, role="journalist")
     if journalist in request.user.subscriptions_journalists.all():
         messages.info(request, f"Already subscribed to {journalist.username}.")
@@ -557,6 +561,9 @@ def subscribe_journalist_html(request, pk):
 # Subscribe publisher (HTML)
 @login_required
 def subscribe_publisher_html(request, pk):
+    """Subscribe the logged-in user to a
+    publisher and redirect to the
+    subscription management page."""
     publisher = get_object_or_404(Publisher, pk=pk)
     request.user.subscriptions_publishers.add(publisher)
     messages.success(request, f"Subscribed to {publisher.name} successfully.")
@@ -566,6 +573,9 @@ def subscribe_publisher_html(request, pk):
 # Unsubscribe journalist (HTML)
 @login_required
 def unsubscribe_journalist_html(request, pk):
+    """Unsubscribe the logged-in user
+    from a journalist and redirect
+    to the subscription management page."""
     journalist = get_object_or_404(CustomUser, pk=pk, role="journalist")
     if journalist in request.user.subscriptions_journalists.all():
         request.user.subscriptions_journalists.remove(journalist)
@@ -580,6 +590,9 @@ def unsubscribe_journalist_html(request, pk):
 # Unsubscribe publisher (HTML)
 @login_required
 def unsubscribe_publisher_html(request, pk):
+    """Unsubscribe the logged-in user
+    from a publisher and redirect
+    to the subscription management page."""
     publisher = get_object_or_404(Publisher, pk=pk)
     request.user.subscriptions_publishers.remove(publisher)
     messages.success(request, f"Unsubscribed from {publisher.name} successfully.")
@@ -589,6 +602,10 @@ def unsubscribe_publisher_html(request, pk):
 # Lists all publishers in the system.
 # This view is used by editors to manage publishers and their affiliations.
 class PublisherListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    """
+    Display a list of all publishers in the system.
+    """
+
     model = Publisher
     template_name = "publisher_list.html"
     context_object_name = "publishers"
@@ -600,6 +617,10 @@ class PublisherListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 # Allows editors to create new publishers.
 # Editors can assign journalists and other editors to a publisher here.
 class PublisherCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    """
+    Allow editors to create new publishers.
+    """
+
     model = Publisher
     form_class = PublisherForm
     template_name = "publisher_form.html"
@@ -612,6 +633,10 @@ class PublisherCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 # Allows editors to update existing publishers.
 # Editors can modify journalist and editor affiliations here.
 class PublisherUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    Allow editors to update existing publishers.
+    """
+
     model = Publisher
     form_class = PublisherForm
     template_name = "publisher_form.html"
@@ -623,6 +648,10 @@ class PublisherUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 # Only editors can delete publishers
 class PublisherDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """
+    Allow editors to delete publishers from the system.
+    """
+
     model = Publisher
     template_name = "publisher_confirm_delete.html"  # Create this template
     success_url = reverse_lazy("publisher-list")
