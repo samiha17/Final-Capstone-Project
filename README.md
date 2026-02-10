@@ -62,6 +62,50 @@ Publishers are created and managed by editors, either directly in the Django Adm
 
 ---
 
+## Setup with Virtual Environment 
+
+1. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Activate the virtual environment:**
+   ```bash
+   source venv/bin/activate
+   ```
+
+3. **Upgrade pip and install dependencies:**
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+4. **Deactivate the virtual environment when finished:**
+   ```bash
+   deactivate
+   ```
+
+---
+
+## Setup with Docker
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t newsapp .
+   ```
+
+2. **Run the Docker container:**
+   ```bash
+   docker run -p 8000:8000 newsapp
+   ```
+
+3. **Access the application:**
+
+* Open your browser and go to: 
+   http://127.0.0.1:8000/
+
+---
+
 ## Database Setup
 
 1. **Create MySQL database:**
