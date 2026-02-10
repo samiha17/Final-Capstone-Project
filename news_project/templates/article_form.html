@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if object %}
+    Edit Article
+  {% else %}
+    Create Article
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+
+        <h3 class="card-title mb-4 text-center">
+          {% if object %}
+            Edit Article
+          {% else %}
+            Create New Article
+          {% endif %}
+        </h3>
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <!-- Title -->
+          <div class="mb-3">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {% if form.title.errors %}
+              <div class="text-danger small">
+                {{ form.title.errors }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Content -->
+          <div class="mb-3">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {% if form.content.errors %}
+              <div class="text-danger small">
+                {{ form.content.errors }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Publisher Dropdown -->
+          {% if form.publisher and not form.publisher.is_hidden %}
+            <div class="mb-3">
+              {{ form.publisher.label_tag }}
+              {{ form.publisher }}
+              {% if form.publisher.errors %}
+                <div class="text-danger small">
+                  {{ form.publisher.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'article-list' %}" class="btn btn-secondary">
+              Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+              {% if object %}
+                Update Article
+              {% else %}
+                Submit Article
+              {% endif %}
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

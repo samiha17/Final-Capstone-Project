@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Publisher{% endblock %}
+
+{% block content %}
+<div class="card p-4">
+  <h3>Delete Publisher</h3>
+  <p>Are you sure you want to delete "<strong>{{ object.name }}</strong>"?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'publisher-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

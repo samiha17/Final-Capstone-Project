@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Newsletters{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Newsletters</h2>
+
+{% if user.is_authenticated %}
+  <!-- Create newsletter button for journalists -->
+  {% if user.role == "journalist" %}
+    <a href="{% url 'newsletter-create' %}" class="btn btn-primary mb-3">
+      Create Newsletter
+    </a>
+  {% endif %}
+{% endif %}
+
+{% if newsletters %}
+  <div class="row">
+    {% for newsletter in newsletters %}
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ newsletter.title }}</h5>
+            <p class="card-text">
+              {{ newsletter.description|truncatewords:20 }}
+            </p>
+            <small class="text-muted">
+              By {{ newsletter.author.username }} •
+              {{ newsletter.created_at|date:"M d, Y" }}
+            </small>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="card-footer bg-white d-flex flex-wrap gap-2">
+
+            <!-- View newsletter (everyone can see) -->
+            <a href="{% url 'newsletter-detail' newsletter.pk %}"
+               class="btn btn-sm btn-primary">
+              View
+            </a>
+
+            <!-- Journalist actions (own newsletters) -->
+            {% if user.is_authenticated and user.role == "journalist" and newsletter.author.id == user.id %}
+              <a href="{% url 'newsletter-update' newsletter.pk %}" class="btn btn-sm btn-warning">
+                Edit
+              </a>
+              <form method="post" action="{% url 'newsletter-delete' newsletter.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this newsletter?');">
+                  Delete
+                </button>
+              </form>
+            {% endif %}
+
+            <!-- Editor actions (edit/delete all newsletters) -->
+            {% if user.is_authenticated and user.role == "editor" %}
+              <a href="{% url 'newsletter-update' newsletter.pk %}" class="btn btn-sm btn-warning">
+                Edit
+              </a>
+              <form method="post" action="{% url 'newsletter-delete' newsletter.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this newsletter?');">
+                  Delete
+                </button>
+              </form>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No newsletters available.</p>
+{% endif %}
+{% endblock %}

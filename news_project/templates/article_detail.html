@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ article.title }}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="card-title">{{ article.title }}</h2>
+        <p class="text-muted">
+          By {{ article.author.username }} • {{ article.created_at|date:"M d, Y" }}
+        </p>
+        <hr>
+        <p>{{ article.content }}</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    {% if user.is_authenticated %}
+      {% if user.role == "editor" or user == article.author %}
+        <div class="d-flex gap-2 mb-4">
+
+          <!-- Edit -->
+          <a href="{% url 'article-update' article.pk %}" class="btn btn-warning btn-sm">
+            Edit Article
+          </a>
+
+          <!-- Delete -->
+          <form method="post" action="{% url 'article-delete' article.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Are you sure you want to delete this article?');">
+              Delete Article
+            </button>
+          </form>
+
+          <!-- Approve (editor only) -->
+          {% if user.role == "editor" %}
+            <form method="post" action="{% url 'article-approve' article.pk %}">
+              {% csrf_token %}
+              {% if not article.approved %}
+                <button type="submit" class="btn btn-success btn-sm">
+                  Approve Article
+                </button>
+              {% else %}
+                <button type="button" class="btn btn-secondary btn-sm" disabled>
+                  Already Approved
+                </button>
+              {% endif %}
+            </form>
+          {% endif %}
+
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <a href="{% url 'article-list' %}" class="btn btn-outline-secondary btn-sm">Back to Articles</a>
+
+  </div>
+</div>
+{% endblock %}

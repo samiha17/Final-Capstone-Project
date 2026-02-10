@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Publisher Requests{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Pending Publisher Requests</h2>
+
+{% if requests %}
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Journalist</th>
+        <th>Publisher</th>
+        <th>Requested At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in requests %}
+        <tr>
+          <td>{{ req.journalist.username }}</td>
+          <td>{{ req.publisher.name }}</td>
+          <td>{{ req.created_at|date:"Y-m-d H:i" }}</td>
+          <td>
+            <form
+              method="post"
+              action="{% url 'publisher-request-approve' req.pk %}"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-success">
+                Approve
+              </button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    There are no pending publisher affiliation requests.
+  </div>
+{% endif %}
+
+<a href="{% url 'publisher-list' %}" class="btn btn-link mt-3">
+  ← Back to Publishers
+</a>
+{% endblock %}

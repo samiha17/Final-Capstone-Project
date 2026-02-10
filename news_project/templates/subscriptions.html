@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Subscriptions{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Manage Your Subscriptions</h2>
+
+<!-- Journalists Section -->
+<h4>Journalists</h4>
+{% if journalists %}
+  <div class="list-group mb-4">
+    {% for journalist in journalists %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          {{ journalist.username }}
+        </div>
+        <div>
+          {% if journalist in user.subscriptions_journalists.all %}
+            <form method="post" action="{% url 'unsubscribe-journalist-html' journalist.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger btn-sm" type="submit">Unsubscribe</button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'subscribe-journalist' journalist.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-success btn-sm" type="submit">Subscribe</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">No journalists found.</div>
+{% endif %}
+
+<!-- Publishers Section -->
+<h4>Publishers</h4>
+{% if publishers %}
+  <div class="list-group mb-4">
+    {% for publisher in publishers %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          {{ publisher.name }}
+        </div>
+        <div>
+          {% if publisher in user.subscriptions_publishers.all %}
+            <form method="post" action="{% url 'unsubscribe-publisher-html' publisher.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger btn-sm" type="submit">Unsubscribe</button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'subscribe-publisher' publisher.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-success btn-sm" type="submit">Subscribe</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">No publishers found.</div>
+{% endif %}
+
+{% endblock %}

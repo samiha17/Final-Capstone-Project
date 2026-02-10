@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribed Articles{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Subscribed Articles</h2>
+
+{% if articles %}
+  <div class="list-group">
+    {% for article in articles %}
+      <a href="{% url 'article-detail' article.pk %}" class="list-group-item list-group-item-action">
+        <h5 class="mb-1">{{ article.title }}</h5>
+        <small>By {{ article.author.username }} | {{ article.created_at|date:"M d, Y" }}</small>
+        <p class="mb-1 text-truncate">{{ article.content }}</p>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>You have no articles from your subscriptions yet.</p>
+{% endif %}
+{% endblock %}

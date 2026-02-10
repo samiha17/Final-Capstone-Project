@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+  <h1 class="mb-3">Welcome to News App</h1>
+  <p class="lead mb-4">Browse articles or see your subscriptions.</p>
+
+  <div class="d-flex justify-content-center gap-3 mb-4">
+    <a href="{% url 'article-list' %}" class="btn btn-primary btn-lg">
+      All Articles
+    </a>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'subscribed-articles' %}" class="btn btn-success btn-lg">
+        Subscribed Articles
+      </a>
+    {% endif %}
+  </div>
+
+  {% if user.is_authenticated %}
+    <!-- Role-based dashboard -->
+    <div class="mt-4">
+      {% if user.role == 'journalist' %}
+        <a href="{% url 'article-create' %}" class="btn btn-warning btn-lg">
+          Create New Article
+        </a>
+      {% elif user.role == 'editor' %}
+        <a href="{% url 'article-list' %}?filter=pending" class="btn btn-danger btn-lg">
+          Review Pending Articles
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

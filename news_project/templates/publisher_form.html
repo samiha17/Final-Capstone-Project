@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ view.object|yesno:"Edit Publisher,Create Publisher" }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <button type="submit" class="btn btn-success">
+    Save
+  </button>
+</form>
+
+<a href="{% url 'publisher-list' %}" class="btn btn-link">Back</a>
+{% endblock %}

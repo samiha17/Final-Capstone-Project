@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Join a Publisher{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Available Publishers</h2>
+
+{% if publishers %}
+  <div class="list-group">
+    {% for publisher in publishers %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ publisher.name }}</strong>
+        </div>
+
+        <form
+          method="post"
+          action="{% url 'publisher-request' publisher.pk %}"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-primary">
+            Request to Join
+          </button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">
+    You are already affiliated with all available publishers.
+  </div>
+{% endif %}
+
+<a href="{% url 'article-list' %}" class="btn btn-link mt-3">
+  ← Back to Articles
+</a>
+{% endblock %}

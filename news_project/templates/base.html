@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}News App{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">NewsApp</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+          {% if user.is_authenticated %}
+
+            <!-- Common links -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'article-list' %}">Articles</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'newsletter-list' %}">Newsletters</a>
+            </li>
+
+            <!-- Reader-only -->
+            {% if user.role == "reader" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'subscribed-articles' %}">Subscribed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage-subscriptions' %}">
+                  Manage Subscriptions
+                </a>
+              </li>
+            {% endif %}
+
+            <!-- Journalist-only -->
+            {% if user.role == "journalist" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'article-create' %}">
+                  New Article
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'newsletter-create' %}">
+                  Create Newsletter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'publisher-request-list' %}">
+                  Join Publisher
+                </a>
+              </li>
+            {% endif %}
+
+            <!-- Editor-only -->
+            {% if user.role == "editor" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'editor-pending-articles' %}">
+                  Review Articles
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'publisher-list' %}">
+                  Manage Publishers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'publisher-requests-pending' %}">
+                  Publisher Requests
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'newsletter-create' %}">
+                  Create Newsletter
+                </a>
+              </li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li class="nav-item d-flex align-items-center">
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-link nav-link p-0 m-0" type="submit">
+                  Logout
+                </button>
+              </form>
+            </li>
+
+          {% else %}
+
+            <!-- Public users -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-4">
+
+    <!-- Django Messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+  </main>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+</body>
+</html>

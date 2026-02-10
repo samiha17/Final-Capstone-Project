@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated and user.role == "journalist" %}
+  <h2 class="mb-4">My Articles</h2>
+
+  <a href="{% url 'article-create' %}" class="btn btn-primary mb-3">
+    Create New Article
+  </a>
+{% else %}
+  <h2 class="mb-4">Articles</h2>
+{% endif %}
+
+{% if articles %}
+  <div class="list-group">
+    {% for article in articles %}
+      <div class="list-group-item mb-2 d-flex justify-content-between align-items-start">
+
+        <!-- Article Info -->
+        <div>
+          <a href="{% url 'article-detail' article.pk %}">
+            <h5 class="mb-1">{{ article.title }}</h5>
+          </a>
+
+          <small>
+            By {{ article.author.username }}
+            {% if user.is_authenticated and user.role == "journalist" or user.role == "editor" %}
+              | Status:
+              {% if article.approved %}
+                <span class="text-success">Approved</span>
+              {% else %}
+                <span class="text-warning">Draft</span>
+              {% endif %}
+            {% endif %}
+          </small>
+
+          <p class="mb-1">{{ article.content|truncatewords:20 }}</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex flex-column gap-1">
+
+          <!-- Edit -->
+          {% if user.is_authenticated %}
+             {% if user.role == "journalist" and article.author.id == user.id or user.role == "editor" %}
+               <a href="{% url 'article-update' article.pk %}" class="btn btn-warning btn-sm">
+                Edit
+              </a>
+            {% endif %}
+          {% endif %}
+
+          <!-- Approve (editor only, unapproved) -->
+          {% if user.is_authenticated and user.role == "editor" and not article.approved %}
+            <form method="post" action="{% url 'article-approve' article.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success btn-sm">
+                Approve
+              </button>
+            </form>
+          {% endif %}
+
+          <!-- Delete -->
+          {% if user.is_authenticated %}
+             {% if user.role == "journalist" and article.author.id == user.id or user.role == "editor" %}
+               <form method="post" action="{% url 'article-delete' article.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm" 
+                        onclick="return confirm('Are you sure you want to delete this article?');">
+                  Delete
+                </button>
+              </form>
+            {% endif %}
+          {% endif %}
+
+          <!-- View (everyone can view) -->
+          <a href="{% url 'article-detail' article.pk %}" class="btn btn-primary btn-sm">
+            View
+          </a>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No articles to show.</p>
+{% endif %}
+
+{% endblock %}

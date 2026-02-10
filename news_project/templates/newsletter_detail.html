@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}{{ newsletter.title }}{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+  <div class="card-body">
+
+    <h3 class="card-title">{{ newsletter.title }}</h3>
+
+    <p class="text-muted">
+      Created by {{ newsletter.author.username }} •
+      {{ newsletter.created_at|date:"M d, Y" }}
+    </p>
+
+    <p class="mb-4">{{ newsletter.description }}</p>
+
+    <h5>Articles in this newsletter</h5>
+
+    {% if newsletter.articles.exists %}
+      <ul class="list-group mb-3">
+        {% for article in newsletter.articles.all %}
+          <li class="list-group-item">
+            <a href="{% url 'article-detail' article.pk %}">
+              {{ article.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No articles added yet.</p>
+    {% endif %}
+
+  </div>
+
+  <!-- Action buttons -->
+  {% if user.is_authenticated %}
+    <div class="card-footer d-flex flex-wrap gap-2">
+
+      <!-- Edit newsletter -->
+      {% if user.role == "editor" or user == newsletter.author %}
+        <a href="{% url 'newsletter-update' newsletter.pk %}"
+           class="btn btn-sm btn-warning">
+          Edit
+        </a>
+      {% endif %}
+
+      <!-- Delete newsletter -->
+      {% if user.role == "editor" or user == newsletter.author %}
+        <form method="post"
+              action="{% url 'newsletter-delete' newsletter.pk %}"
+              style="display:inline;">
+          {% csrf_token %}
+          <button type="submit"
+                  class="btn btn-sm btn-danger"
+                  onclick="return confirm('Are you sure you want to delete this newsletter?');">
+            Delete
+          </button>
+        </form>
+      {% endif %}
+
+    </div>
+  {% endif %}
+</div>
+
+<a href="{% url 'newsletter-list' %}" class="btn btn-secondary">
+  Back to Newsletters
+</a>
+{% endblock %}
