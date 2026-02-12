@@ -5,15 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Final Capstone Project documentation &#8212; Final Capstone Project 1.0 documentation</title>
+    <title>NewsApp Documentation &#8212; Final Capstone Project 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
     <script src="_static/documentation_options.js?v=f2a433a1"></script>
-    <script src="_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -31,12 +31,84 @@
 
           <div class="body" role="main">
             
-  <section id="final-capstone-project-documentation">
-<h1>Final Capstone Project documentation<a class="headerlink" href="#final-capstone-project-documentation" title="Link to this heading">¶</a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
+  <section id="newsapp-documentation">
+<h1>NewsApp Documentation<a class="headerlink" href="#newsapp-documentation" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#news.models.Article"><code class="docutils literal notranslate"><span class="pre">Article</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#news.models.CustomUser"><code class="docutils literal notranslate"><span class="pre">CustomUser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#news.models.Newsletter"><code class="docutils literal notranslate"><span class="pre">Newsletter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#news.models.Publisher"><code class="docutils literal notranslate"><span class="pre">Publisher</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#news.models.PublisherRequest"><code class="docutils literal notranslate"><span class="pre">PublisherRequest</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleApproveView"><code class="docutils literal notranslate"><span class="pre">ArticleApproveView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleApproveViewHTML"><code class="docutils literal notranslate"><span class="pre">ArticleApproveViewHTML</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleCreateView"><code class="docutils literal notranslate"><span class="pre">ArticleCreateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleDeleteView"><code class="docutils literal notranslate"><span class="pre">ArticleDeleteView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleDetailView"><code class="docutils literal notranslate"><span class="pre">ArticleDetailView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleListView"><code class="docutils literal notranslate"><span class="pre">ArticleListView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleUpdateView"><code class="docutils literal notranslate"><span class="pre">ArticleUpdateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.ArticleViewSet"><code class="docutils literal notranslate"><span class="pre">ArticleViewSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.IsEditorOrOwner"><code class="docutils literal notranslate"><span class="pre">IsEditorOrOwner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterCreateView"><code class="docutils literal notranslate"><span class="pre">NewsletterCreateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterDeleteView"><code class="docutils literal notranslate"><span class="pre">NewsletterDeleteView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterDetailView"><code class="docutils literal notranslate"><span class="pre">NewsletterDetailView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterListView"><code class="docutils literal notranslate"><span class="pre">NewsletterListView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterUpdateView"><code class="docutils literal notranslate"><span class="pre">NewsletterUpdateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.NewsletterViewSet"><code class="docutils literal notranslate"><span class="pre">NewsletterViewSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.PublisherCreateView"><code class="docutils literal notranslate"><span class="pre">PublisherCreateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.PublisherDeleteView"><code class="docutils literal notranslate"><span class="pre">PublisherDeleteView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.PublisherListView"><code class="docutils literal notranslate"><span class="pre">PublisherListView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.PublisherUpdateView"><code class="docutils literal notranslate"><span class="pre">PublisherUpdateView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.SubscribedArticleView"><code class="docutils literal notranslate"><span class="pre">SubscribedArticleView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.approve_publisher_request"><code class="docutils literal notranslate"><span class="pre">approve_publisher_request()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.article_detail"><code class="docutils literal notranslate"><span class="pre">article_detail()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.article_list"><code class="docutils literal notranslate"><span class="pre">article_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.editor_pending_articles"><code class="docutils literal notranslate"><span class="pre">editor_pending_articles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.is_editor"><code class="docutils literal notranslate"><span class="pre">is_editor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.is_reader"><code class="docutils literal notranslate"><span class="pre">is_reader()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.manage_subscriptions"><code class="docutils literal notranslate"><span class="pre">manage_subscriptions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.publisher_request_list"><code class="docutils literal notranslate"><span class="pre">publisher_request_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.publisher_requests_pending"><code class="docutils literal notranslate"><span class="pre">publisher_requests_pending()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.register"><code class="docutils literal notranslate"><span class="pre">register()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.request_publisher_affiliation"><code class="docutils literal notranslate"><span class="pre">request_publisher_affiliation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.subscribe_journalist"><code class="docutils literal notranslate"><span class="pre">subscribe_journalist()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.subscribe_journalist_html"><code class="docutils literal notranslate"><span class="pre">subscribe_journalist_html()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.subscribe_publisher"><code class="docutils literal notranslate"><span class="pre">subscribe_publisher()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.subscribe_publisher_html"><code class="docutils literal notranslate"><span class="pre">subscribe_publisher_html()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.subscribed_articles"><code class="docutils literal notranslate"><span class="pre">subscribed_articles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.unsubscribe_journalist"><code class="docutils literal notranslate"><span class="pre">unsubscribe_journalist()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.unsubscribe_journalist_html"><code class="docutils literal notranslate"><span class="pre">unsubscribe_journalist_html()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.unsubscribe_publisher"><code class="docutils literal notranslate"><span class="pre">unsubscribe_publisher()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#news.views.unsubscribe_publisher_html"><code class="docutils literal notranslate"><span class="pre">unsubscribe_publisher_html()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="forms.html#news.forms.ArticleForm"><code class="docutils literal notranslate"><span class="pre">ArticleForm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="forms.html#news.forms.CustomUserCreationForm"><code class="docutils literal notranslate"><span class="pre">CustomUserCreationForm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="forms.html#news.forms.PublisherForm"><code class="docutils literal notranslate"><span class="pre">PublisherForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="serializers.html">Serializers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html#news.serializers.ArticleSerializer"><code class="docutils literal notranslate"><span class="pre">ArticleSerializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html#news.serializers.NewsletterSerializer"><code class="docutils literal notranslate"><span class="pre">NewsletterSerializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html#news.serializers.PublisherSerializer"><code class="docutils literal notranslate"><span class="pre">PublisherSerializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html#news.serializers.UserSerializer"><code class="docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html#news.permissions.IsEditor"><code class="docutils literal notranslate"><span class="pre">IsEditor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html#news.permissions.IsJournalist"><code class="docutils literal notranslate"><span class="pre">IsJournalist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html#news.permissions.IsReader"><code class="docutils literal notranslate"><span class="pre">IsReader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">URLs</a></li>
+</ul>
 </div>
 </section>
 
@@ -45,7 +117,7 @@ documentation for details.</p>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="#">Final Capstone Project</a></h1>
 
@@ -56,24 +128,35 @@ documentation for details.</p>
 
 
 
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializers.html">Serializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">URLs</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="models.html" title="next chapter">Models</a></li>
   </ul></li>
 </ul>
 </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -90,8 +173,8 @@ documentation for details.</p>
       &#169;2026, Samiha.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/index.rst.txt"
