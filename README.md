@@ -56,38 +56,84 @@ Publishers are created and managed by editors, either directly in the Django Adm
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/samiha17/newsapp.git
-   cd newsapp
+   git clone https://github.com/samiha17/Final-Capstone-Project.git
+   cd Final-Capstone-Project/news_project
    ```
 
 ---
 
-## Setup with Virtual Environment 
+## OPTION A: Run Locally
 
-1. **Create a virtual environment:**
+1. **Ensure MySQL Server is Running:**
+   ```bash
+   mysql -u root -p
+   ```
+
+2. **Create MySQL database:**
+
+   Login to your MySQL server and create the database:
+
+   ```sql
+   CREATE DATABASE news_db;
+   ```
+3. **Update database credentials in `news_project/settings.py`** if your MySQL username or password differ:
+
+   ```python
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'NAME': 'news_db',
+           'USER': 'root',
+           'PASSWORD': 'your_mysql_password',
+           'HOST': 'localhost',
+           'PORT': '3306',
+       }
+   }
+   ```
+
+4. **Create a virtual environment:**
    ```bash
    python -m venv venv
    ```
 
-2. **Activate the virtual environment:**
+5. **Activate the virtual environment:**
    ```bash
    source venv/bin/activate
    ```
 
-3. **Upgrade pip and install dependencies:**
+6. **Upgrade pip and install dependencies:**
    ```bash
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
 
-4. **Deactivate the virtual environment when finished:**
+7. **Apply migrations (only after MySQL is running and the database exists):**
    ```bash
-   deactivate
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+8. **Create a superuser:**
+   ```bash
+   python manage.py createsuperuser
    ```
 
+9. **Run the development server:**
+   ```bash
+   python manage.py runserver
+   ```
+* Open your browser and go to:  
+   http://127.0.0.1:8000/
+
+10. **Deactivate the virtual environment when finished:**
+   ```bash
+   deactivate
+   ```   
 ---
 
-## Setup with Docker
+## Option B: Run with Docker
+
+**Ensure you are inside the `news_project` directory (where Dockerfile and manage.py are located) before running these commands.**
+
 
 1. **Build the Docker image:**
    ```bash
@@ -103,71 +149,6 @@ Publishers are created and managed by editors, either directly in the Django Adm
 
 * Open your browser and go to: 
    http://127.0.0.1:8000/
-
----
-
-## Database Setup
-
-1. **Create MySQL database:**
-
-   Login to your MySQL server and create the database:
-
-   ```sql
-   CREATE DATABASE news_db;
-   ```
-
-2. **Update database credentials in `news_project/settings.py`** if your MySQL username or password differ:
-
-   ```python
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.mysql',
-           'NAME': 'news_db',
-           'USER': 'root',
-           'PASSWORD': 'your_mysql_password',
-           'HOST': 'localhost',
-           'PORT': '',
-       }
-   }
-   ```
-
-3. **Install MySQL Python adapter** if not already installed:
-
-   ```bash
-      pip install mysqlclient
-   ```
-
----
-
-## Running Project
-
-1. **Apply migrations:**
-
-   Run the following commands to create the necessary database tables:
-
-   ```bash
-      python manage.py makemigrations
-      python manage.py migrate
-   ```
-
-2. **Create a superuser** (for admin access):
-
-   ```bash
-      python manage.py createsuperuser
-   ```
-
-   Follow the prompts to create a user with admin privileges.
-
-3. **Run the development server:**
-
-   ```bash
-      python manage.py runserver
-   ```
-
-4. **Access the application:**
-
-   * Open your browser and go to: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-   * You can login, register new users, browse products, and test password reset functionality.
 
 ---
 
